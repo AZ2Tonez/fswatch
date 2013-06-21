@@ -1,3 +1,5 @@
+AZ2Tonez changes: Print "UPDATED: <path>\n" to stdout instead of running arbitrary command. Also, allow the latency to be specified via the command line. Add a fun comment.
+
 ## fswatch.c
 
 This is a small program using the Mac OS X FSEvents API to monitor a directory.

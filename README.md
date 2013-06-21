@@ -32,7 +32,7 @@ with colons like:
 In the case you want to wait longer before printing the queued up events
 (this will print events after waiting for 3 seconds from the first event received):
 
-	    ./fswatch /some/dir:/some/otherdir 3.0
+    ./fswatch /some/dir:/some/otherdir 3.0
 
 ### About
 

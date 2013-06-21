@@ -1,4 +1,4 @@
-AZ2Tonez changes: Print "UPDATED: <path>\n" to stdout instead of running arbitrary command. Also, allow the latency to be specified via the command line. Add a fun comment.
+AZ2Tonez changes: Print 'UPDATED: <path>' to stdout instead of running arbitrary command. Also, allow the latency to be specified via the command line. Add a fun comment.
 
 ## fswatch.c
 
@@ -19,36 +19,20 @@ a directory on your `$PATH`.
 
 ### Basic Usage
 
-    ./fswatch /some/dir "echo changed" 
+    ./fswatch /some/dir
 
-This would monitor `/some/dir` for any change, and run `echo changed`
-when a modification event is received.
+This would monitor `/some/dir` for any change, and print the path names
+to stdout every second when a modification event is received.
 
 In the case you want to watch multiple directories, just separate them
 with colons like:
 
-    ./fswatch /some/dir:/some/otherdir "echo changed" 
+    ./fswatch /some/dir:/some/otherdir 
 
-### Usage with rsync
+In the case you want to wait longer before printing the queued up events
+(this will print events after waiting for 3 seconds from the first event received):
 
-`fswatch` can be used with `rsync` to keep a remote directory in sync
-with a local directory continuously as local files change.  The
-following example was contributed by
-[Michael A. Smith](http://twitter.com/michaelasmith):
-
-```bash
-#!/bin/sh
-
-##
-# Keep local path in sync with remote path on server.
-# Ignore .git metadata.
-#
-local=$1
-remote=$2
-
-cd "$local" &&
-fswatch . "date +%H:%M:%S && rsync -iru --exclude .git --exclude-from=.gitignore --delete . $remote"
-```
+	    ./fswatch /some/dir:/some/otherdir 3.0
 
 ### About
 

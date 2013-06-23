@@ -51,7 +51,6 @@ void callback(
  
 //set up fsevents and callback
 int main(int argc, char **argv) {
-	void *callbackInfo = NULL;
 	FSEventStreamRef stream; 
 	CFAbsoluteTime latency = 1.0;
 	FILE *pLog = NULL;
@@ -84,16 +83,13 @@ int main(int argc, char **argv) {
 		pLog = fopen(argv[3], "wt");
 		if ( !pLog ) { fprintf(stderr, "Failed to open log file - %s!\n", argv[3]); exit(1); }
 		fclose(pLog);
-		
-		callbackInfo = malloc(len+1);
-		strncpy((char *)callbackInfo, argv[3], len+1);
 	}
 
 	CFStringRef mypath = CFStringCreateWithCString(NULL, argv[1], kCFStringEncodingUTF8); 
 	CFArrayRef pathsToWatch = CFStringCreateArrayBySeparatingStrings (NULL, mypath, CFSTR(":"));
 	FSEventStreamContext ctx;
 	ctx.version = 0; ctx.retain = NULL; ctx.release = NULL; ctx.copyDescription = NULL;
-	ctx.info = callbackInfo;
+	ctx.info = argv[3];
 
 	stream = FSEventStreamCreate(NULL,
 								 &callback,
@@ -107,6 +103,4 @@ int main(int argc, char **argv) {
 	FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode); 
 	FSEventStreamStart(stream);
 	CFRunLoopRun();
-	
-	free(callbackInfo);
 }

@@ -34,6 +34,10 @@ In the case you want to wait longer before printing the queued up events
 
     ./fswatch /some/dir:/some/otherdir 3.0
 
+In the case you want to log events to a log file, instead of stdout, specify a log file path:
+
+    ./fswatch /some/dir:/some/otherdir 1.0 /path/to/log.txt
+
 ### About
 
 This code was adapted from the example program in the

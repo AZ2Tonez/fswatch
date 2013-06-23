@@ -1,4 +1,4 @@
-AZ2Tonez changes: Print 'UPDATED: <path>' to stdout instead of running arbitrary command. Also, allow the latency to be specified via the command line. Add a fun comment.
+AZ2Tonez changes: Print 'UPDATED: <path>' to stdout (or a log file) instead of running arbitrary command. Also, allow the latency to be specified via the command line. Add a fun comment.
 
 ## fswatch.c
 

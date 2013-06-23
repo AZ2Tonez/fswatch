@@ -31,8 +31,18 @@ void callback(
 	
 	FILE *pLog = NULL;
 	if ( clientCallBackInfo != NULL ) {
-		// there's a log file, open it
-		pLog = fopen((char *)clientCallBackInfo, "at");
+		int i = 0;
+		while ( pLog == NULL && i < 3 ) {
+			// there's a log file, open it
+			pLog = fopen((char *)clientCallBackInfo, "at");
+			if ( pLog == NULL && i < 2 ) { 
+				printf("Unable to open log file, trying again in 3 seconds...\n");
+				sleep(3000);
+			}
+			i++;
+		}
+		
+		if ( pLog == NULL ) fprintf(stderr, "Unable to open log file %s for writing - event will be written to stdout instead!\n", (char *)clientCallBackInfo);
 	}
   
   	int i;
